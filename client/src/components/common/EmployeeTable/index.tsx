@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface Employee {
   id: number;
@@ -9,7 +9,11 @@ interface Employee {
   image: string;
 }
 
-const EmployeeTable: React.FC = () => {
+interface EmployeeTableProps {
+  filter: string;
+}
+
+const EmployeeTable: React.FC<EmployeeTableProps> = ({ filter }) => {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
@@ -17,6 +21,15 @@ const EmployeeTable: React.FC = () => {
       .then((response) => response.json())
       .then((data) => setEmployees(data));
   }, []);
+
+  const filteredEmployees = employees.filter((employee) => {
+    const lowercasedFilter = filter.toLowerCase();
+    return (
+      employee.name.toLowerCase().includes(lowercasedFilter) ||
+      employee.job.toLowerCase().includes(lowercasedFilter) ||
+      employee.phone.includes(lowercasedFilter)
+    );
+  });
 
   return (
     <div className="rounded-lg overflow-hidden">
@@ -44,11 +57,11 @@ const EmployeeTable: React.FC = () => {
       <div className="h-0.3" />
       <table className="w-full table-fixed border-separate border-spacing-y-1">
         <tbody>
-          {employees.map((employee, index) => (
+          {filteredEmployees.map((employee, index) => (
             <tr
               key={employee.id}
               className={`shadow-sm bg-neutral-6 ${
-                index === employees.length - 1
+                index === filteredEmployees.length - 1
                   ? "last:[&>td:first-child]:rounded-bl-lg last:[&>td:last-child]:rounded-br-lg"
                   : ""
               }`}

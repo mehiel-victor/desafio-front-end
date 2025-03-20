@@ -1,18 +1,25 @@
+import React, { useState } from "react";
 import Header from "./components/Header";
 import EmployeeTable from "./components/common/EmployeeTable";
+import EmployeeFilter from "./components/common/EmployeeFilter";
 
 const App: React.FC = () => {
+  const [filter, setFilter] = useState("");
+
+  const handleFilterChange = (newFilter: string) => {
+    setFilter(newFilter);
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="bg-secondary flex flex-col min-h-screen">
       <Header />
-      <main className="bg-neutral-5 flex-1">
-        <div className="flex items-center justify-between p-8">
-          <h1 className="text-h1 font-heading font-medium text-neutral-1">
-            Funcionários
-          </h1>
+      <main className="">
+        <div className="flex items-center justify-between px-medium-32 py-medium-40">
+          <h1 className="text-lg text-neutral-1">Funcionários</h1>
+          <EmployeeFilter onFilterChange={handleFilterChange} />
         </div>
-        <div className="p-medium-32">
-          <EmployeeTable />
+        <div className="px-medium-32">
+          <EmployeeTable filter={filter} />
         </div>
       </main>
     </div>
