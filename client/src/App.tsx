@@ -11,7 +11,9 @@ const App: React.FC = () => {
             Funcionários
           </h1>
         </div>
-        <EmployeeTable />
+        <div className="p-medium-32">
+          <EmployeeTable />
+        </div>
       </main>
     </div>
   );

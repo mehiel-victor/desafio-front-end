@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Employee {
   id: number;
@@ -11,7 +11,6 @@ interface Employee {
 
 const EmployeeTable: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     fetch("http://localhost:3001/employees")
@@ -19,51 +18,60 @@ const EmployeeTable: React.FC = () => {
       .then((data) => setEmployees(data));
   }, []);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredEmployees = employees.filter(
-    (employee) =>
-      employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      employee.job.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      employee.phone.includes(searchTerm)
-  );
-
   return (
-    <div className="p-4">
-      <input
-        type="text"
-        placeholder="Pesquise por nome, cargo ou telefone"
-        className="p-2 border border-gray-300 rounded mb-4"
-        onChange={handleSearch}
-      />
-      <table className="w-full table-auto border-collapse">
+    <div className="rounded-lg overflow-hidden">
+      <table className="w-full table-fixed border-collapse">
         <thead>
-          <tr>
-            <th className="border px-4 py-2">Imagem</th>
-            <th className="border px-4 py-2">Nome</th>
-            <th className="border px-4 py-2">Cargo</th>
-            <th className="border px-4 py-2">Data de Admissão</th>
-            <th className="border px-4 py-2">Telefone</th>
+          <tr className="bg-primary shadow-sm">
+            <th className="text-neutral-6 text-md rounded-tl-lg p-little-08">
+              FOTO
+            </th>
+            <th className="text-left text-neutral-6 text-md p-little-08">
+              NOME
+            </th>
+            <th className="text-left text-neutral-6 text-md p-little-08">
+              CARGO
+            </th>
+            <th className="text-left text-neutral-6 text-md p-little-08">
+              DATA DE ADMISSÃO
+            </th>
+            <th className="text-left text-neutral-6 text-md rounded-tr-lg p-little-08">
+              TELEFONE
+            </th>
           </tr>
         </thead>
+      </table>
+      <div className="h-0.3" />
+      <table className="w-full table-fixed border-separate border-spacing-y-1">
         <tbody>
-          {filteredEmployees.map((employee) => (
-            <tr key={employee.id}>
-              <td className="border px-4 py-2">
+          {employees.map((employee, index) => (
+            <tr
+              key={employee.id}
+              className={`shadow-sm bg-neutral-6 ${
+                index === employees.length - 1
+                  ? "last:[&>td:first-child]:rounded-bl-lg last:[&>td:last-child]:rounded-br-lg"
+                  : ""
+              }`}
+            >
+              <td className="p-little-08 flex justify-center">
                 <img
                   src={employee.image}
                   alt={employee.name}
-                  className="w-12 h-12 rounded-full"
+                  className="w-8 h-8 rounded-full"
                 />
               </td>
-              <td className="border px-4 py-2">{employee.name}</td>
-              <td className="border px-4 py-2">{employee.job}</td>
-              <td className="border px-4 py-2">
+              <td className="text-neutral-1 text-sm p-little-08 text-left">
+                {employee.name}
+              </td>
+              <td className="text-neutral-1 text-sm p-little-08 text-left">
+                {employee.job}
+              </td>
+              <td className="text-neutral-1 text-sm p-little-08 text-left">
                 {new Date(employee.admission_date).toLocaleDateString()}
               </td>
-              <td className="border px-4 py-2">{employee.phone}</td>
+              <td className="text-neutral-1 text-sm p-little-08 text-left pr-0">
+                {employee.phone}
+              </td>
             </tr>
           ))}
         </tbody>
