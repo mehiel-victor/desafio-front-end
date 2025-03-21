@@ -11,7 +11,7 @@ interface Employee {
   image: string;
 }
 
-const EmployeeTable: React.FC = () => {
+const EmployeeTable: React.FC<{ filter: string }> = ({ filter }) => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState<{
     [key: number]: boolean;
@@ -29,6 +29,15 @@ const EmployeeTable: React.FC = () => {
       .then((response) => response.json())
       .then((data) => setEmployees(data));
   }, []);
+
+  const filteredEmployees = employees.filter((employee) => {
+    const lowercasedFilter = filter.toLowerCase();
+    return (
+      employee.name.toLowerCase().includes(lowercasedFilter) ||
+      employee.job.toLowerCase().includes(lowercasedFilter) ||
+      employee.phone.includes(lowercasedFilter)
+    );
+  });
 
   return (
     <div>
@@ -58,11 +67,11 @@ const EmployeeTable: React.FC = () => {
           <div className="h-0.3" />
           <table className="w-full table-fixed border-separate border-spacing-y-1">
             <tbody>
-              {employees.map((employee, index) => (
+              {filteredEmployees.map((employee, index) => (
                 <tr
                   key={employee.id}
                   className={`shadow-sm bg-neutral-6 ${
-                    index === employees.length - 1
+                    index === filteredEmployees.length - 1
                       ? "last:[&>td:first-child]:rounded-bl-lg last:[&>td:last-child]:rounded-br-lg"
                       : ""
                   }`}
@@ -108,7 +117,7 @@ const EmployeeTable: React.FC = () => {
           </div>
         </div>
 
-        {employees.map((employee) => (
+        {filteredEmployees.map((employee) => (
           <div
             key={employee.id}
             className="bg-neutral-6 p-3 mb-2 rounded-lg shadow-sm"
