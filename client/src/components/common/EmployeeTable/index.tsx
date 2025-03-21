@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ChevronDown from "../icons/ChevronDown";
 import ChevronUp from "../icons/ChevronUp";
 import { formatPhone } from "../../../utils/formatPhone";
+import { formatDate } from "../../../utils/formatDate";
 
 interface Employee {
   id: number;
@@ -91,7 +92,7 @@ const EmployeeTable: React.FC<{ filter: string }> = ({ filter }) => {
                     {employee.job}
                   </td>
                   <td className="text-neutral-1 text-sm p-little-08 text-left">
-                    {new Date(employee.admission_date).toLocaleDateString()}
+                    {formatDate(employee.admission_date)}
                   </td>
                   <td className="text-neutral-1 text-sm p-little-08 text-left pr-0">
                     {formatPhone(employee.phone)}
@@ -153,7 +154,7 @@ const EmployeeTable: React.FC<{ filter: string }> = ({ filter }) => {
                 </p>
                 <p>
                   <strong>Data de Admissão:</strong>{" "}
-                  {new Date(employee.admission_date).toLocaleDateString()}
+                  {formatDate(employee.admission_date)}
                 </p>
                 <p>
                   <strong>Telefone:</strong> {formatPhone(employee.phone)}
