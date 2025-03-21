@@ -6,8 +6,8 @@ import EmployeeFilter from "./components/common/EmployeeFilter";
 const App: React.FC = () => {
   const [filter, setFilter] = useState("");
 
-  const handleFilterChange = (newFilter: string) => {
-    setFilter(newFilter);
+  const handleFilterChange = (filterText: string) => {
+    setFilter(filterText);
   };
 
   return (
