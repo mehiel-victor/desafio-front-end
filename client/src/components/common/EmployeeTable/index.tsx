@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import ChevronDown from "../icons/ChevronDown";
+import ChevronUp from "../icons/ChevronUp";
 
 interface Employee {
   id: number;
@@ -11,7 +13,16 @@ interface Employee {
 
 const EmployeeTable: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const toggleDropdown = (id: number) => {
+    setIsDropdownOpen((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   useEffect(() => {
     fetch("http://localhost:3001/employees")
@@ -19,55 +30,129 @@ const EmployeeTable: React.FC = () => {
       .then((data) => setEmployees(data));
   }, []);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredEmployees = employees.filter(
-    (employee) =>
-      employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      employee.job.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      employee.phone.includes(searchTerm)
-  );
-
   return (
-    <div className="p-4">
-      <input
-        type="text"
-        placeholder="Pesquise por nome, cargo ou telefone"
-        className="p-2 border border-gray-300 rounded mb-4"
-        onChange={handleSearch}
-      />
-      <table className="w-full table-auto border-collapse">
-        <thead>
-          <tr>
-            <th className="border px-4 py-2">Imagem</th>
-            <th className="border px-4 py-2">Nome</th>
-            <th className="border px-4 py-2">Cargo</th>
-            <th className="border px-4 py-2">Data de Admissão</th>
-            <th className="border px-4 py-2">Telefone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredEmployees.map((employee) => (
-            <tr key={employee.id}>
-              <td className="border px-4 py-2">
+    <div>
+      <div className="hidden md:block">
+        <div className="rounded-lg overflow-hidden">
+          <table className="w-full table-fixed border-collapse">
+            <thead>
+              <tr className="bg-primary shadow-sm">
+                <th className="text-neutral-6 text-md rounded-tl-lg p-little-08">
+                  FOTO
+                </th>
+                <th className="text-left text-neutral-6 text-md p-little-08">
+                  NOME
+                </th>
+                <th className="text-left text-neutral-6 text-md p-little-08">
+                  CARGO
+                </th>
+                <th className="text-left text-neutral-6 text-md p-little-08">
+                  DATA DE ADMISSÃO
+                </th>
+                <th className="text-left text-neutral-6 text-md rounded-tr-lg p-little-08">
+                  TELEFONE
+                </th>
+              </tr>
+            </thead>
+          </table>
+          <div className="h-0.3" />
+          <table className="w-full table-fixed border-separate border-spacing-y-1">
+            <tbody>
+              {employees.map((employee, index) => (
+                <tr
+                  key={employee.id}
+                  className={`shadow-sm bg-neutral-6 ${
+                    index === employees.length - 1
+                      ? "last:[&>td:first-child]:rounded-bl-lg last:[&>td:last-child]:rounded-br-lg"
+                      : ""
+                  }`}
+                >
+                  <td className="p-little-08 flex justify-center">
+                    <img
+                      src={employee.image}
+                      alt={employee.name}
+                      className="w-8 h-8 rounded-full"
+                    />
+                  </td>
+                  <td className="text-neutral-1 text-sm p-little-08 text-left">
+                    {employee.name}
+                  </td>
+                  <td className="text-neutral-1 text-sm p-little-08 text-left">
+                    {employee.job}
+                  </td>
+                  <td className="text-neutral-1 text-sm p-little-08 text-left">
+                    {new Date(employee.admission_date).toLocaleDateString()}
+                  </td>
+                  <td className="text-neutral-1 text-sm p-little-08 text-left pr-0">
+                    {employee.phone}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="md:hidden">
+        <div className="bg-primary p-4.5 mb-2 rounded-t-lg shadow-sm">
+          <div className="flex gap-2 justify-left items-center">
+            <div className="flex items-center">
+              <span className="text-neutral-6 text-md font-bold">FOTO</span>
+            </div>
+            <div className="flex items-center">
+              <span className="text-neutral-6 text-md font-bold">NOME</span>
+            </div>
+            <div className="flex items-center ml-auto">
+              <div className="w-2 h-2 rounded-full bg-neutral-6" />
+            </div>
+          </div>
+        </div>
+
+        {employees.map((employee) => (
+          <div
+            key={employee.id}
+            className="bg-neutral-6 p-3 mb-2 rounded-lg shadow-sm"
+          >
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
                 <img
                   src={employee.image}
                   alt={employee.name}
-                  className="w-12 h-12 rounded-full"
+                  className="w-8 h-8 rounded-full mr-3"
                 />
-              </td>
-              <td className="border px-4 py-2">{employee.name}</td>
-              <td className="border px-4 py-2">{employee.job}</td>
-              <td className="border px-4 py-2">
-                {new Date(employee.admission_date).toLocaleDateString()}
-              </td>
-              <td className="border px-4 py-2">{employee.phone}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                <span className="text-neutral-1 text-sm font-medium">
+                  {employee.name}
+                </span>
+              </div>
+              <button
+                onClick={() => toggleDropdown(employee.id)}
+                className="text-neutral-1 text-sm bg-transparent"
+              >
+                {isDropdownOpen[employee.id] ? (
+                  <ChevronUp stroke="#0500FF" />
+                ) : (
+                  <ChevronDown stroke="#0500FF" />
+                )}
+              </button>
+            </div>
+
+            {isDropdownOpen[employee.id] && (
+              <div className="mt-3 text-neutral-1 text-sm text-left">
+                <p>
+                  <strong>Cargo:</strong> {employee.job}
+                </p>
+                <p>
+                  <strong>Data de Admissão:</strong>{" "}
+                  {new Date(employee.admission_date).toLocaleDateString()}
+                </p>
+                <p>
+                  <strong>Telefone:</strong> {employee.phone}
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
