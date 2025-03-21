@@ -14,7 +14,7 @@ const App: React.FC = () => {
     <div className="bg-secondary flex flex-col min-h-screen">
       <Header />
       <main className="">
-        <div className="flex items-center justify-between px-medium-32 py-medium-40">
+        <div className="flex flex-col md:flex-row gap-6 items-left justify-between px-medium-32 py-medium-40">
           <h1 className="text-lg text-neutral-1">Funcionários</h1>
           <EmployeeFilter onFilterChange={handleFilterChange} />
         </div>
