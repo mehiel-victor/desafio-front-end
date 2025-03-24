@@ -22,6 +22,8 @@ const EmployeeFilter: React.FC<EmployeeFilterProps> = ({ onFilterChange }) => {
         onChange={handleChange}
         className="px-4 py-3 border-2 bg-neutral-6 hover:border-primary/40 focus-visible:border-primary focus:border-primary border-neutral-3 rounded-lg focus:outline-none w-full"
         placeholder="Pesquisar"
+        aria-label="Digite para pesquisar funcionários por nome, cargo ou telefone"
+        title="Digite para pesquisar funcionários"
       />
       <div className="absolute right-3 top-7/12 transform -translate-y-1/2">
         <Magnifier />

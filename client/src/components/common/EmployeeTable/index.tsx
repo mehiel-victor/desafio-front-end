@@ -61,7 +61,12 @@ const EmployeeTable: React.FC<{ filter: string }> = ({ filter }) => {
                     />
                   </td>
                   <td className="text-neutral-1 text-sm p-little-08 text-left">
-                    {employee.name}
+                    <span
+                      className="tooltip"
+                      data-tooltip={`Nome: ${employee.name}`}
+                    >
+                      {employee.name}
+                    </span>
                   </td>
                   <td className="text-neutral-1 text-sm p-little-08 text-left">
                     {employee.job}
