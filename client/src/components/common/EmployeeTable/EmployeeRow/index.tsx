@@ -13,16 +13,22 @@ export const EmployeeRow: React.FC<{
       <div className="flex items-center gap-2">
         <img
           src={employee.image}
-          alt={employee.name}
+          alt={`Foto de perfil de ${employee.name}`}
           className="w-8 h-8 rounded-full mr-3"
+          aria-hidden="true"
         />
         <span className="text-neutral-1 text-sm font-medium">
-          {employee.name}
+          <span className="tooltip" data-tooltip={`Nome: ${employee.name}`}>
+            {employee.name}
+          </span>
         </span>
       </div>
       <button
         onClick={toggleDropdown}
         className="text-neutral-1 text-sm bg-transparent"
+        aria-label={`Exibir detalhes de ${employee.name}`}
+        aria-expanded={isDropdownOpen ? "true" : "false"}
+        title={`Clique para ver detalhes de ${employee.name}`}
       >
         {isDropdownOpen ? (
           <ChevronUp stroke="#0500FF" />
