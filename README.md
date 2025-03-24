@@ -140,10 +140,6 @@ desafio-front-end
 4. Faça o push para a sua branch (`git push origin feature/nomedafeature`).
 5. Abra um pull request.
 
-## License
-
-MIT License. Veja o arquivo LICENSE para mais detalhes.
-
 ## Contato
 
 Se tiver dúvidas ou sugestões, entre em contato pelo e-mail: [mehiel.dev@gmail.com](mailto:mehiel.dev@gmail.com).
