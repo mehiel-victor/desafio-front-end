@@ -137,7 +137,7 @@ ver
 
 1. Faça um fork deste repositório.
 2. Crie uma branch para a sua feature (`git checkout -b feature/nomedafeature`).
-3. Faça o commit das suas alterações (`git commit -m 'Adiciona nova funcionalidade'`).
+3. Faça o conventional commit das suas alterações (`git commit -m 'feat: add new feature'`).
 4. Faça o push para a sua branch (`git push origin feature/nomedafeature`).
 5. Abra um pull request.
 
