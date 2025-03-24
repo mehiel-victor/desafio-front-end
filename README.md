@@ -67,11 +67,11 @@ Isso iniciará a API no endpoint http://localhost:3001/employees.
 4. Inicie a aplicação front-end:
 
 ```bash
-   cd client
-   yarn dev
+cd client
+yarn dev
 ```
 
-Isso iniciará o front-end no endereço http://localhost:3000.
+Isso iniciará o front-end no endereço http://localhost:5173.
 
 ## Funcionalidades
 
