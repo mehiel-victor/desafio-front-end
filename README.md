@@ -118,7 +118,8 @@ desafio-front-end
 │ ├─ tsconfig.node.json
 │ └─ vite.config.ts
 ├─ package.json
-├─ server
+├─ ser
+ver
 │ ├─ README.md
 │ ├─ db.json
 │ ├─ package.json
