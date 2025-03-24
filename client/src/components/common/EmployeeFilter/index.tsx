@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Magnifier from "../icons/Magnifier";
+import Magnifier from "../../icons/Magnifier";
 
 interface EmployeeFilterProps {
   onFilterChange: (filter: string) => void;

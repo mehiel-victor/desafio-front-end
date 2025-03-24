@@ -1,4 +1,4 @@
-import Logo from "../common/Logo";
+import Logo from "../../assets/Logo";
 
 const Header: React.FC = () => {
   return (
