@@ -34,38 +34,42 @@ O repositório é dividido em dois pacotes principais:
 
 1. Clone o repositório:
 
-   ````bash
-   git clone <url-do-repositorio>
-   cd desafio-front-end```
-
-   ````
+```bash
+git clone [<url-do-repositorio>](https://github.com/mehiel-victor/desafio-front-end)
+cd desafio-front-end
+```
 
 2. Instale as dependências:
 
 - Para o client:
 
-```
+```bash
 cd client
 yarn install
 ```
 
 - Para o server:
 
-```
+```bash
 cd server
 yarn install
 ```
 
 3. Inicie a API simulada (json-server):
 
-````cd server
-yarn start```
+```bash
+cd server
+yarn start
 Isso iniciará a API no endpoint http://localhost:3001/employees.
+```
 
 4. Inicie a aplicação front-end:
-```cd client
-yarn dev```
-Isso iniciará o front-end no endereço http://localhost:3000.
+
+```bash
+   cd client
+   yarn dev
+   Isso iniciará o front-end no endereço http://localhost:3000.
+```
 
 ## Funcionalidades
 
@@ -75,8 +79,8 @@ Isso iniciará o front-end no endereço http://localhost:3000.
 - **Formatação de Dados**: As datas são formatadas em `DD/MM/YYYY` e os números de telefone têm uma máscara.
 
 ## Estrutura de Diretórios
-````
 
+```
 desafio-front-end
 ├─ client
 │ ├─ README.md
@@ -125,9 +129,7 @@ ver
 │ ├─ package.json
 │ └─ yarn.lock
 └─ yarn.lock
-
 ```
-
 
 ## Como Contribuir
 
@@ -144,4 +146,3 @@ MIT License. Veja o arquivo LICENSE para mais detalhes.
 ## Contato
 
 Se tiver dúvidas ou sugestões, entre em contato pelo e-mail: [mehiel.dev@gmail.com](mailto:mehiel.dev@gmail.com).
-```
