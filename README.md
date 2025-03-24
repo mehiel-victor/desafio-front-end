@@ -35,7 +35,7 @@ O repositório é dividido em dois pacotes principais:
 1. Clone o repositório:
 
 ```bash
-git clone [<url-do-repositorio>](https://github.com/mehiel-victor/desafio-front-end)
+git clone https://github.com/mehiel-victor/desafio-front-end
 cd desafio-front-end
 ```
 
