@@ -1,5 +1,5 @@
 {
-  "name": "desafio-front-end",
+  "name": "kinship",
   "private": true,
   "workspaces": [
     "client",
