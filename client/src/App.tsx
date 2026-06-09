@@ -363,9 +363,11 @@ const App: React.FC = () => {
       <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between shrink-0">
         <div className="p-6">
           <div className="flex items-center gap-3 mb-8">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white font-display font-bold text-xl shadow-md">
-              KS
-            </div>
+            <img 
+              src="/kinship_logo.png" 
+              alt="KS Logo" 
+              className="h-10 w-10 rounded-xl object-cover object-top shadow-md border border-slate-200/10"
+            />
             <div>
               <span className="font-display font-bold text-lg leading-none block bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
                 Kinship
